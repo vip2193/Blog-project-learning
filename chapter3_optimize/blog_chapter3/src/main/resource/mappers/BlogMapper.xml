@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="blog_status" jdbcType="INTEGER" property="blogStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage"/>
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pojo.Blog">
+    <result column="blog_content" jdbcType="VARCHAR" property="blogContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_id, blog_title, t_blog.userid, t_blog.type_id, blog_status, create_time, update_time,cover_image
+  </sql>
+  <sql id="Blob_Column_List">
+    blog_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select 
+    <include refid="Base_Column_List" />
+    ,type_Name,username
+    from t_blog LEFT JOIN blog_type on t_blog.type_id = blog_type.type_id
+    LEFT JOIN t_user ON t_user.userId = t_blog.userid 
+    WHERE blog_status = 1 
+    <if test="typeId != null">
+       AND t_blog.type_id = #{typeId} 
+     </if>
+    ORDER BY blog_id DESC 
+  </select>
+  <select id="selectListByUserId" resultMap="BaseResultMap" parameterType="map">
+    select 
+    <include refid="Base_Column_List" />
+    ,type_Name
+    from t_blog LEFT JOIN blog_type on t_blog.type_id = blog_type.type_id
+    where userid = #{userId} AND blog_status = #{blogStatus}
+    ORDER BY blog_id DESC 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Blog">
+    insert into t_blog (blog_title, userid, 
+      type_id, blog_status, create_time, 
+      update_time, blog_content,cover_image)
+    values (#{blogTitle,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{typeId,jdbcType=INTEGER}, #{blogStatus,jdbcType=INTEGER}, now(), 
+      now(), #{blogContent,jdbcType=LONGVARCHAR},#{coverImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Blog">
+    insert into t_blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="blogTitle != null">
+        blog_title,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="blogStatus != null">
+        blog_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="blogContent != null">
+        blog_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null">
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogStatus != null">
+        #{blogStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogContent != null">
+        #{blogContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Blog">
+    update t_blog
+    <set>
+      <if test="blogTitle != null">
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="blogStatus != null">
+        blog_status = #{blogStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = now(),
+      </if>
+      <if test="blogContent != null">
+        blog_content = #{blogContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pojo.Blog">
+    update t_blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      blog_status = #{blogStatus,jdbcType=INTEGER},
+      update_time = now(),
+      blog_content = #{blogContent,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Blog">
+    update t_blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      blog_status = #{blogStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+</mapper>

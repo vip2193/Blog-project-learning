@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+	*{
+		padding: 0px;
+	}
+	
+	body {
+		background: #eee;
+	}
+	
+	.title{
+		color:#000000;
+	}
+	
+	.bg {
+		width: 100%;
+		background: #fff;
+		margin-bottom: 20px;
+	}
+	/* 圆形图片 */
+	.cicleImg{
+		border-radius: 25px;
+		border: none;
+		width: 50px;
+		height: 50px;
+	}
+	/*.container{
+		width: 1200px;
+		margin: 0 auto;
+	}*/
+	
+	.header {
+		background: #fff;
+		line-height: 70px;
+	}
+	
+	.header .search {
+		margin-top: 20px;
+	}
+	
+	.header .nav-item {
+		padding: 15px;
+		font-size: 18px;
+	}
+	
+	.hot-article {
+		box-sizing: border-box;
+		background: #fff;
+		padding: 0 10px;
+		line-height: 60px;
+		border-bottom: 1px solid #eee;
+	}
+	
+	.hot-article .hot-item {
+		padding: 0 10px;
+	}
+	
+	.article-item {
+		padding: 16px 20px;
+		border-bottom: 1px solid #eee;
+		color: #888;
+		background: #fff;
+	}
+	
+	.article-item img {
+		width: 100px;
+		height: 80px;
+	}
+	
+	.box-login {
+		width: 100%;
+		background: #fff;
+		margin-bottom:20px;
+		padding: 10px 20px 20px 20px;
+	}
+	
+	.box-tag {
+		background: #fff;
+	}
+	
+	.box-tag .tag {
+		line-height: 40px;
+		padding: 0 20px;
+		border-bottom: 1px solid #eee;
+	}
+	
+	.box-tag .tag-list {
+		padding: 10px 20px;
+	}
+	
+	.box-tag .tag-list button {
+		margin: 10px;
+	}
