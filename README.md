@@ -1,9 +1,11 @@
 # Blog-project-learning
 Step by step, learn how to make blog projects using SpringMVC、Mybatis、Spring。
 
-#Effect Picture
+# Effect Picture
 
-<img src = "https://www.educoder.net/attachments/download/204001" />
+<img alt="" src="https://www.educoder.net/attachments/download/204001">
+
+<img src="https://www.educoder.net/attachments/download/204002" />
 
 ![](https://www.educoder.net/attachments/download/204001)
 
