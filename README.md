@@ -3,13 +3,13 @@ Step by step, learn how to make blog projects using SpringMVC、Mybatis、Spring
 
 # Effect Picture
 
-![image.jpg](https://www.educoder.net/attachments/download/204001.jpg)
+![image.jpg](https://www.educoder.net/attachments/download/204001)
 
-![image.jpg](https://www.educoder.net/attachments/download/204002.jpg)
+![image.jpg](https://www.educoder.net/attachments/download/204002)
 
-![image.jpg](https://www.educoder.net/attachments/download/204003.jpg)
+![image.jpg](https://www.educoder.net/attachments/download/204003)
 
-![image.png](https://www.educoder.net/attachments/download/204461.pmg)
+![image.png](https://www.educoder.net/attachments/download/204461)
 
 ![image.gif](https://www.educoder.net/attachments/download/204460)
 
